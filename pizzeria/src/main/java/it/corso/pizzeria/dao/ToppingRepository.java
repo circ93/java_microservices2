@@ -1,4 +1,4 @@
-package it.corso.pizzeria.DAO;
+package it.corso.pizzeria.dao;
 
 import it.corso.pizzeria.model.Topping;
 import org.springframework.data.jpa.repository.JpaRepository;
