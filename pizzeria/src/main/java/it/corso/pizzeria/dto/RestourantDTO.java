@@ -1,5 +1,6 @@
 package it.corso.pizzeria.dto;
 
+import it.corso.pizzeria.model.Driver;
 import lombok.*;
 
 import java.util.HashSet;
@@ -10,14 +11,16 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class PizzaDTO {
+public class RestourantDTO {
 
     private Long id;
 
     private String name;
 
-    private Boolean favorite;
+    private String address;
 
-    private Set<ToppingDTO> toppings = new HashSet<>();
+    private String city;
+
+    private Set<Driver> drivers = new HashSet<>();
 
 }
