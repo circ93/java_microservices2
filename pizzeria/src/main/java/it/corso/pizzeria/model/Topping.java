@@ -1,5 +1,6 @@
 package it.corso.pizzeria.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Topping implements Serializable {
     private String name;
 
     @ManyToMany(mappedBy = "toppings")
+    @JsonIgnore
     private Set<Pizza> pizze = new HashSet<>();
 
 }

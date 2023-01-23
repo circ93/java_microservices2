@@ -1,6 +1,5 @@
 package it.corso.pizzeria.dto;
 
-import it.corso.pizzeria.model.Topping;
 import lombok.*;
 
 import java.util.HashSet;
@@ -18,6 +17,6 @@ public class PizzaDTO {
 
     private Boolean favorite;
 
-    private Set<Topping> toppings = new HashSet<>();
+    private Set<ToppingDTO> toppings = new HashSet<>();
 
 }
