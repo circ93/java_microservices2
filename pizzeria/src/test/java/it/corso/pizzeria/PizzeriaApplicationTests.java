@@ -1,7 +1,10 @@
 package it.corso.pizzeria;
 
 import it.corso.pizzeria.dao.PizzaRepository;
+import it.corso.pizzeria.dao.RestaurantRepository;
+import it.corso.pizzeria.model.Driver;
 import it.corso.pizzeria.model.Pizza;
+import it.corso.pizzeria.model.Restaurant;
 import it.corso.pizzeria.model.Topping;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,9 @@ import java.util.Set;
 class PizzeriaApplicationTests {
 
     @Autowired
-    PizzaRepository pizzaRepository;
+    private PizzaRepository pizzaRepository;
+    @Autowired
+    private RestaurantRepository restaurantRepository;
 
     @Test
     void populateDB() {
@@ -85,6 +90,19 @@ class PizzeriaApplicationTests {
         Pizza pizzaEFigliata = Pizza.builder().name("Pizza e Figliata").toppings(Set.of(figliata, mortadella, cremaDiGorgonzolaEPistacchio)).build();
         Pizza pizzaBufalaDiMare = Pizza.builder().name("Pizza bufala di mare").toppings(Set.of(fiorDiLatte, pacchetelleGialle, bottargaDiMuggine, aliciDiCetara, zesteDiLimoneDiCetraro, stracciatella, basilico)).build();
         pizzaRepository.saveAll(List.of(margherita, quattroFormaggi, pizzaDAsila, pizzaSacroEProfano, pizzaDAccarezzare, pizzaDAlessandro, pizzaEFigliata, pizzaBufalaDiMare));
+    }
+
+    @Test
+    void populateDB3() {
+        Driver driver1 = Driver.builder().name("Driver1").build();
+        Driver driver2 = Driver.builder().name("Driver2").build();
+        Driver driver3 = Driver.builder().name("Driver3").build();
+        Driver driver4 = Driver.builder().name("Driver4").build();
+        Driver driver5 = Driver.builder().name("Driver5").build();
+        Driver driver6 = Driver.builder().name("Driver6").build();
+        Restaurant vogliaDiPizza = Restaurant.builder().name("Voglia di pizza").address("Via Roma").city("Roma").drivers(Set.of(driver1, driver2, driver3)).build();
+        Restaurant pizzaAGoGo = Restaurant.builder().name("Pizza a GoGo").address("Via Milano").city("Milano").drivers(Set.of(driver4, driver5, driver6)).build();
+        restaurantRepository.saveAll(List.of(vogliaDiPizza, pizzaAGoGo));
     }
 
 }

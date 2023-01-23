@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Builder
-public class RestourantDTO {
+public class RestaurantDTO {
 
     private Long id;
 

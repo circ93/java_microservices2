@@ -27,5 +27,5 @@ public class Driver implements Serializable {
 
     @ManyToMany(mappedBy = "drivers")
     @JsonIgnore
-    private Set<Restourant> restaurants = new HashSet<>();
+    private Set<Restaurant> restaurants = new HashSet<>();
 }

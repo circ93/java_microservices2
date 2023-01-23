@@ -1,8 +1,8 @@
 package it.corso.pizzeria.service.impl;
 
-import it.corso.pizzeria.dao.RestourantRepository;
-import it.corso.pizzeria.model.Restourant;
-import it.corso.pizzeria.service.RestourantService;
+import it.corso.pizzeria.dao.RestaurantRepository;
+import it.corso.pizzeria.model.Restaurant;
+import it.corso.pizzeria.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,17 +13,17 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class RestaurantServiceImpl implements RestourantService {
+public class RestaurantServiceImpl implements RestaurantService {
 
-    private final RestourantRepository repository;
+    private final RestaurantRepository repository;
 
     @Override
-    public Restourant save(Restourant entity) {
+    public Restaurant save(Restaurant entity) {
         return repository.save(entity);
     }
 
     @Override
-    public List<Restourant> save(List<Restourant> entities) {
+    public List<Restaurant> save(List<Restaurant> entities) {
         return repository.saveAll(entities);
     }
 
@@ -33,18 +33,18 @@ public class RestaurantServiceImpl implements RestourantService {
     }
 
     @Override
-    public Optional<Restourant> findById(Long id) {
+    public Optional<Restaurant> findById(Long id) {
         return repository.findById(id);
     }
 
     @Override
-    public List<Restourant> findAll() {
+    public List<Restaurant> findAll() {
         return repository.findAll();
     }
 
     @Override
-    public Restourant update(Restourant entity, Long id) {
-        Optional<Restourant> _restaurant = repository.findById(id);
+    public Restaurant update(Restaurant entity, Long id) {
+        Optional<Restaurant> _restaurant = repository.findById(id);
         if (_restaurant.isPresent()) {
             return save(entity);
         } else {
