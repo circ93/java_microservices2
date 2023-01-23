@@ -26,4 +26,7 @@ public interface RestaurantController {
     @ApiOperation("Update restourant")
     public RestaurantDTO update(@RequestBody RestaurantDTO restaurantDTO, @PathVariable("id") Long id);
 
+    @ApiOperation("Add pizza to restaurant menu")
+    public RestaurantDTO addPizzaToRestaurantMenu(@RequestBody RestaurantDTO restaurantDTO);
+
 }

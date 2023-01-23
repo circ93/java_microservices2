@@ -2,6 +2,7 @@ package it.corso.pizzeria.service.impl;
 
 import it.corso.pizzeria.dao.PizzaRepository;
 import it.corso.pizzeria.model.Pizza;
+import it.corso.pizzeria.model.Restaurant;
 import it.corso.pizzeria.service.PizzaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -60,5 +61,15 @@ public class PizzaServiceImpl implements PizzaService {
         } else {
             return null;
         }
+    }
+
+    @Override
+    public List<Pizza> findByRestaurantId(Long id) {
+        List<Pizza> _pizzas = repository.findByRestaurantsIn(
+                List.of(Restaurant.builder()
+                        .id(id)
+                        .build())
+        );
+        return _pizzas;
     }
 }

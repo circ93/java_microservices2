@@ -23,7 +23,7 @@ public class Restaurant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "restourant_id", nullable = false)
+    @Column(name = "restaurant_id", nullable = false)
     private Long id;
 
     @NotBlank
@@ -45,12 +45,26 @@ public class Restaurant implements Serializable {
     @JoinTable(
             name = "restaurants_drivers",
             joinColumns = @JoinColumn(
-                    name = "restourant_id", referencedColumnName = "restourant_id"),
+                    name = "restaurant_id", referencedColumnName = "restaurant_id"),
             inverseJoinColumns = @JoinColumn(
                     name = "driver_id", referencedColumnName = "driver_id"
             )
     )
     @JsonIgnore
     private Set<Driver> drivers = new HashSet<>();
+
+
+    //ci occerre avere i riferimenti alle pizze che il singolo ristorante può offrire nel menu
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST} )
+    @JoinTable(
+            name = "restaurants_pizzas",
+            joinColumns = @JoinColumn(
+                    name = "restaurant_id", referencedColumnName = "restaurant_id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "pizza_id", referencedColumnName = "pizza_id"
+            )
+    )
+    @JsonIgnore
+    private Set<Pizza> pizzas = new HashSet<>();
 
 }

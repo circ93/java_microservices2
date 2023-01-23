@@ -1,6 +1,5 @@
 package it.corso.pizzeria.controller.Impl;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import it.corso.pizzeria.controller.PizzaController;
 import it.corso.pizzeria.dto.PizzaDTO;
 import it.corso.pizzeria.mapper.PizzaMapper;
@@ -65,5 +64,12 @@ public class PizzaControllerImpl implements PizzaController {
     public PizzaDTO update(@RequestBody PizzaDTO pizzaDTO,@PathVariable Long id) {
         Pizza _pizza = pizzaMapper.asEntity(pizzaDTO);
         return pizzaMapper.asDTO(pizzaService.update(_pizza, id));
+    }
+
+    @Override
+    @GetMapping("/restaurant/{id}")
+    public List<PizzaDTO> findByRestaurantId(@PathVariable Long id) {
+        List<Pizza> _pizzas = pizzaService.findByRestaurantId(id);
+        return pizzaMapper.asDTOList(_pizzas);
     }
 }
