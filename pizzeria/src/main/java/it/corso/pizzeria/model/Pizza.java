@@ -12,8 +12,8 @@ import java.util.Set;
 
 
 @Entity
-@Data
-@EqualsAndHashCode
+@Getter
+@Setter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor
 @Builder
