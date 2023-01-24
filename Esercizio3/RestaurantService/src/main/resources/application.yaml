@@ -1,0 +1,28 @@
+
+spring:
+  application:
+    name: RESTAURANT-SERVICE
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/db2_restaurant_service?useSSL=false
+    username: gian
+    password: Gianluca
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+
+  mvc:
+    path match:
+      matching-strategy: ant_path_matcher
+
+server:
+  port: 8082
+  servlet:
+    context-path: /api
+
+
+app:
+  pizza-service-url: http://localhost:8081/api/pizzas/restaurant
