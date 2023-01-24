@@ -6,10 +6,13 @@ import it.corso.restaurantservice.mapper.RestaurantMapper;
 import it.corso.restaurantservice.model.Restaurant;
 import it.corso.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/restaurants")
@@ -19,6 +22,9 @@ public class RestaurantControllerImpl implements RestaurantController {
     private final RestaurantService restaurantService;
     private final RestaurantMapper restaurantMapper;
 
+    //mi occorre per richiamare l'url del servizio pizza salvato nel file properties
+    @Value("${app.pizza-service-url}")
+    private String pizzaServiceUrl;
 
     @Override
     @PostMapping
@@ -51,6 +57,13 @@ public class RestaurantControllerImpl implements RestaurantController {
     public RestaurantDTO update(@RequestBody RestaurantDTO restaurantDTO, @PathVariable Long id) {
         Restaurant _restaurant = restaurantMapper.asEntity(restaurantDTO);
         return restaurantMapper.asDTO(restaurantService.update(_restaurant, id));
+    }
+
+    @Override
+    @GetMapping("/pizzas/{restaurant_id}")
+    public List<Object> getPizzasByRestaurantId(@PathVariable Long restaurant_id) {
+        RestTemplate restTemplate = new RestTemplate();
+        return List.of(Objects.requireNonNull(restTemplate.getForObject(pizzaServiceUrl + "/" + restaurant_id, Object[].class)));
     }
 
 }

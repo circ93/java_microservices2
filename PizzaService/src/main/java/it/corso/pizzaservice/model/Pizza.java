@@ -24,6 +24,7 @@ public class Pizza implements Serializable {
     @Column(name = "pizza_id", nullable = false)
     private Long id;
 
+
     @NotBlank
     @Size(max = 255)
     private String name;

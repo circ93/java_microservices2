@@ -22,3 +22,7 @@ server:
   port: 8082
   servlet:
     context-path: /api
+
+
+app:
+  pizza-service-url: http://localhost:8081/api/pizzas/restaurant
