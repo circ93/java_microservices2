@@ -3,6 +3,7 @@ package it.corso.pizzaservice.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import it.corso.pizzaservice.dto.PizzaDTO;
+import it.corso.pizzaservice.dto.RestaurantIdsDTO;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -29,5 +30,8 @@ public interface PizzaController {
 
     @ApiOperation("Find pizzas by restaurants id")
     public List<PizzaDTO> findByRestaurantId(@PathVariable("id") Long id);
+
+    @ApiOperation("Add pizza to restaurant")
+    public List<PizzaDTO> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS);
 
 }

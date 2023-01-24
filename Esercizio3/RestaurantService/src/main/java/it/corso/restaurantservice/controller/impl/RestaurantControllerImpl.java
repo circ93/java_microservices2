@@ -2,6 +2,7 @@ package it.corso.restaurantservice.controller.impl;
 
 import it.corso.restaurantservice.controller.RestaurantController;
 import it.corso.restaurantservice.dto.RestaurantDTO;
+import it.corso.restaurantservice.dto.RestaurantIdsDTO;
 import it.corso.restaurantservice.mapper.RestaurantMapper;
 import it.corso.restaurantservice.model.Restaurant;
 import it.corso.restaurantservice.service.RestaurantService;
@@ -64,6 +65,13 @@ public class RestaurantControllerImpl implements RestaurantController {
     public List<Object> getPizzasByRestaurantId(@PathVariable Long restaurant_id) {
         RestTemplate restTemplate = new RestTemplate();
         return List.of(Objects.requireNonNull(restTemplate.getForObject(pizzaServiceUrl + "/" + restaurant_id, Object[].class)));
+    }
+
+    @Override
+    @PostMapping("/addPizzas")
+    public List<Object> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS) {
+        RestTemplate restTemplate = new RestTemplate();
+        return List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS, Object[].class)));
     }
 
 }

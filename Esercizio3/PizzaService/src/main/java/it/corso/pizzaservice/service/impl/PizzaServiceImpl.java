@@ -18,39 +18,39 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class PizzaServiceImpl implements PizzaService {
 
-    private final PizzaRepository repository;
+    private final PizzaRepository pizzaRepository;
 
     private final RestaurantIdsRepository restaurantIdsRepository;
 
     @Override
     public Pizza save(Pizza entity) {
-        return repository.save(entity);
+        return pizzaRepository.save(entity);
     }
 
     @Override
     public List<Pizza> save(List<Pizza> entities) {
-        return (List<Pizza>) repository.saveAll(entities);
+        return (List<Pizza>) pizzaRepository.saveAll(entities);
     }
 
     @Override
     public void deleteById(Long id) {
-        repository.deleteById(id);
+        pizzaRepository.deleteById(id);
 
     }
 
     @Override
     public Optional<Pizza> findById(Long id) {
-        return repository.findById(id);
+        return pizzaRepository.findById(id);
     }
 
     @Override
     public List<Pizza> findAll() {
-        return repository.findAll();
+        return pizzaRepository.findAll();
     }
 
     @Override
     public Pizza update(Pizza entity, Long id) {
-        Optional<Pizza> _pizza = repository.findById(id);
+        Optional<Pizza> _pizza = pizzaRepository.findById(id);
         if (_pizza.isPresent()) {
             return save(entity);
         } else {
@@ -58,14 +58,26 @@ public class PizzaServiceImpl implements PizzaService {
         }
     }
 
+    //metodo che restituisce tutte le pizze del ristornate con l'id passato
     @Override
     public List<Pizza> findByRestaurantId(Long restaurant_id) {
         List<RestaurantIds> _restaurantIds = restaurantIdsRepository.findByRestaurantId(restaurant_id);
         List<Pizza> _pizzas = new ArrayList<>(_restaurantIds.size());
 
         for (RestaurantIds el : _restaurantIds) {
-            _pizzas.add(repository.findById(el.getPizzaId()).orElse(null));
+            _pizzas.add(pizzaRepository.findById(el.getPizzaId()).get());
         }
+        return _pizzas;
+    }
+
+    // metodo che mi aggiorna la tabella RestaurantIds quindi associa le pizze passate al ristorante
+    @Override
+    public List<Pizza> addPizzasToRestaurant(List<RestaurantIds> restaurantIdsList) {
+        List<Pizza> _pizzas = new ArrayList<>(restaurantIdsList.size());
+        for (RestaurantIds el : restaurantIdsList){
+            _pizzas.add(pizzaRepository.findById(el.getPizzaId()).get());
+        }
+        restaurantIdsRepository.saveAll(restaurantIdsList);
         return _pizzas;
     }
 }
