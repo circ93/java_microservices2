@@ -2,7 +2,7 @@
 ## _Spring Boot Microservices_
 
 ## 20/01
-- Pizzeria project draft creation
+- Esercizio 1 -> monolithic Pizzeria project
 
 ## 23/01
 - Esercizio 2 -> split project Pizzeria in two Services
