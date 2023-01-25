@@ -9,3 +9,6 @@
 
 ## 24/01
 - Esercizio 3 -> implemented the communication between the two services
+
+## 25/01
+- Esercizio 4 -> creata la connessione al broker Rabbitmq
