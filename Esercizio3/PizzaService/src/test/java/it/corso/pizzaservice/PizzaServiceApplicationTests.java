@@ -17,7 +17,7 @@ class PizzaServiceApplicationTests {
     private PizzaRepository pizzaRepository;
 
     @Test
-    void populateDB2() {
+    void populateDB() {
         Topping mozzarella = Topping.builder().name("Mozzarella locale").build();
         Topping pomodoroLocale = Topping.builder().name("Pomodoro locale").build();
         Topping basilico = Topping.builder().name("Basilico").build();

@@ -17,7 +17,7 @@ class RestaurantServiceApplicationTests {
     private RestaurantRepository restaurantRepository;
 
     @Test
-    void populateDB3() {
+    void populateDB() {
         Driver driver1 = Driver.builder().name("Driver1").build();
         Driver driver2 = Driver.builder().name("Driver2").build();
         Driver driver3 = Driver.builder().name("Driver3").build();
