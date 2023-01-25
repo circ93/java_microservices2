@@ -21,7 +21,6 @@ public class PizzaControllerImpl implements PizzaController {
 
     private final PizzaService pizzaService;
     private final PizzaMapper pizzaMapper;
-
     private final RestaurantIdsMapper restaurantIdsMapper;
 
     @Override

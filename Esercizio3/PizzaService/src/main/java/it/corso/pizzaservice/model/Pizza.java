@@ -29,7 +29,7 @@ public class Pizza implements Serializable {
     @Size(max = 255)
     private String name;
 
-    private Boolean favorite;
+    private boolean favorite;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
