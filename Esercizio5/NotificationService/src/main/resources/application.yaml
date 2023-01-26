@@ -8,4 +8,12 @@ app:
     pizzas-added-notification: q.pizzas-added-notification
 
 server:
-  port: 8083
+  port: 0
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
