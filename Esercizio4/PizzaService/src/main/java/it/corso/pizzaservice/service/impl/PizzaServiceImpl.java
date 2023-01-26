@@ -6,6 +6,9 @@ import it.corso.pizzaservice.model.Pizza;
 import it.corso.pizzaservice.model.RestaurantIds;
 import it.corso.pizzaservice.service.PizzaService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +24,14 @@ public class PizzaServiceImpl implements PizzaService {
     private final PizzaRepository pizzaRepository;
 
     private final RestaurantIdsRepository restaurantIdsRepository;
+
+    @Value("${app.rabbitmq.pizzas-added-routingkey}")
+    private String queuePizzaAdded;
+
+    @Value("${app.rabbitmq.pizzas-added-notification}")
+    private String queuePizzasAddedNotify;
+
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public Pizza save(Pizza entity) {
@@ -78,6 +89,11 @@ public class PizzaServiceImpl implements PizzaService {
             _pizzas.add(pizzaRepository.findById(el.getPizzaId()).get());
         }
         restaurantIdsRepository.saveAll(restaurantIdsList);
+        // dopo aver inserito le pizze creo il messaggio di risposta da inviare alla coda di rabbitmq per restaurant
+        rabbitTemplate.convertAndSend("", queuePizzaAdded, _pizzas);
+        String event = "Sono state aggiunte " + _pizzas.size() + " pizze al ristorante!";
+        rabbitTemplate.convertAndSend("", queuePizzasAddedNotify, event);
         return _pizzas;
     }
+
 }

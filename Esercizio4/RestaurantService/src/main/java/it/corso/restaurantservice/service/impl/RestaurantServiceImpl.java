@@ -1,9 +1,12 @@
 package it.corso.restaurantservice.service.impl;
 
 import it.corso.restaurantservice.dao.RestaurantRepository;
+import it.corso.restaurantservice.dto.RestaurantIdsDTO;
 import it.corso.restaurantservice.model.Restaurant;
 import it.corso.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +19,12 @@ import java.util.Optional;
 public class RestaurantServiceImpl implements RestaurantService {
 
     private final RestaurantRepository repository;
+
+    //richiamo la chiave del topic/queue di rabbit
+    @Value("${app.rabbitmq.add-pizzas-routingkey}")
+    private String addPizzasToRestaurantRoutinkey;
+
+    private final RabbitTemplate rabbitTemplate;
 
     @Override
     public Restaurant save(Restaurant entity) {
@@ -52,4 +61,10 @@ public class RestaurantServiceImpl implements RestaurantService {
         }
     }
 
+    @Override
+    public void addPizzasToRestaurant(List<RestaurantIdsDTO> restaurantIdsDTOS) {
+
+        rabbitTemplate.convertAndSend("", addPizzasToRestaurantRoutinkey, restaurantIdsDTOS);
+
+    }
 }

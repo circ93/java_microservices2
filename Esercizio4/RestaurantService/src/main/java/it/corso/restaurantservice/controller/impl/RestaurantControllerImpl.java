@@ -7,7 +7,6 @@ import it.corso.restaurantservice.mapper.RestaurantMapper;
 import it.corso.restaurantservice.model.Restaurant;
 import it.corso.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +27,6 @@ public class RestaurantControllerImpl implements RestaurantController {
     @Value("${app.pizza-service-url}")
     private String pizzaServiceUrl;
 
-    //richiamo la chiave del topic/queue di rabbit
-    @Value("${app.rabbitmq.routingkey}")
-    private String routingKey;
-
-    private final RabbitTemplate rabbitTemplate;
 
     @Override
     @PostMapping
@@ -90,10 +84,10 @@ public class RestaurantControllerImpl implements RestaurantController {
     @Override
     @PostMapping("/addPizzas")
     public List<Object> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS) {
-        RestTemplate restTemplate = new RestTemplate();
-        List<Object> result = List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS, Object[].class)));
-        rabbitTemplate.convertAndSend("", routingKey, "Added no. " + result.size() + " pizzas!");
-        return result;
+
+        restaurantService.addPizzasToRestaurant(restaurantIdsDTOS);
+
+        return null;
     }
 
 }

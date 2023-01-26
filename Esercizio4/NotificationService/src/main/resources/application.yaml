@@ -5,7 +5,7 @@ spring:
 
 app:
   rabbitmq:
-    restaurant-service-routingkey: q.add-pizzas-to-restaurant
+    pizzas-added-notification: q.pizzas-added-notification
 
 server:
   port: 8083

@@ -1,4 +1,5 @@
-package it.corso.restaurantservice.configuration;
+package it.corso.pizzaservice.configuration;
+
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -22,14 +23,8 @@ public class RabbitMQConfig {
 
     private final CachingConnectionFactory cachingConnectionFactory;
 
-    @Value("${app.rabbitmq.add-pizzas-routingkey}")
-    private String queue;
-
     @Value("${app.rabbitmq.pizzas-added-routingkey}")
-    private String queue_added;
-
-    @Value("${app.rabbitmq.pizzas-added-notification}")
-    private String queue_notify;
+    private String queue;
 
     public RabbitMQConfig(CachingConnectionFactory cachingConnectionFactory) {
         this.cachingConnectionFactory = cachingConnectionFactory;
@@ -40,15 +35,6 @@ public class RabbitMQConfig {
         return QueueBuilder.durable(queue).build();
     }
 
-    @Bean
-    public Queue pizzasToRestaurantAddedQueue() {
-        return QueueBuilder.durable(queue_added).build();
-    }
-
-    @Bean
-    public Queue pizzasAddedNotification() {
-        return QueueBuilder.durable(queue_notify).build();
-    }
 
     @Bean
     public RetryOperationsInterceptor retryInterceptor() {
