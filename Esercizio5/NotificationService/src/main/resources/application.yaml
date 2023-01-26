@@ -1,0 +1,11 @@
+
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+
+app:
+  rabbitmq:
+    pizzas-added-notification: q.pizzas-added-notification
+
+server:
+  port: 8083
