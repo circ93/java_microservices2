@@ -12,3 +12,6 @@
 
 ## 25/01
 - Esercizio 4 -> created connection whit Rabbitmq broker
+
+## 26/01
+- Esercizio 5 -> start spring cloud implementation
