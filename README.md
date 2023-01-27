@@ -32,6 +32,7 @@ Come funziona:
 > Questo componente va implementato in ogni microservizio che deve contattare altri microservizi. <br  />
 
 Dipendenze da inserire:
+```sh
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
@@ -44,9 +45,11 @@ Dipendenze da inserire:
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-actuator</artifactId>
 </dependency>
+```
 
 Parametri da inserire nello yaml:
 
+```sh
 resilience4j:
   circuitbreaker:
     circuit-breaker-aspect-order: 1
@@ -70,7 +73,7 @@ resilience4j:
         exponential-backoff-multiplier: 2
         retry-exceptions:
           - org.springframework.web.client.RestClientException
-
+```
 
 
 - Esercizio 9 -> spring cloud implementation (Spring Cloud Zipkin) ...coming soon
@@ -81,6 +84,7 @@ Prima cosa da fare è avviare il container doker con zipkin sulla porta di defau
 
 Poi tocca inserire le dipendenze nei microservizi:
 
+```sh
 <!-- ZipKin -->
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -90,6 +94,8 @@ Poi tocca inserire le dipendenze nei microservizi:
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-sleuth-zipkin</artifactId>
 </dependency>
+```
+<br  />
 
 - Esercizio 10 -> spring cloud implementation (Spring Cloud OpenFeign) ...coming soon
 
@@ -101,8 +107,9 @@ Inserire le seguenti configurazioni sui vari servizi
 
 Dipendenze del Pom
 
+```sh
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
-
+```
