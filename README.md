@@ -23,13 +23,16 @@
 
 <img src="https://github.com/circ93/java_microservices2/blob/9cd223559f4b83d30ebc5439c6ff792fae8e0999/img/spring_cloud_circuit_braker.png" alt="drawing" width="500"/>
 
+
 > Questo service ci viene in aiuto quando contatto un servizio e non ricevo risposta, o la risposta impiega troppo tempo. <br  />
 > Dall'immagine sopra possiamo immaginare le chiamate API come un circuito elettrico, per cui quando il circuito è aperto la chiamata si interrompe e non potrò ricevere risposta. Questo componente introduce anche il concetto di mezzo-aperto, ovvero il caso in cui la risposta impiega troppo tempo ad arrivare. <br  />
 > Quindi in qualche modo questo componente gestisce la resilienza delle comunicazioni! <br  />
 <br  />
 Come funziona:
+<br  />
 > Resilience4j è un componente che a seconda della API annotata con @Resilience4j lui fa il polling del servizio chiamato e sa se il servizio è disponibile (circuito chiuso), o non disponibile (circuito apert), tempi di attesa per la risposta (mezzo aperto). Se il circuito presenta problemi, a seconda dei mille settaggi nel file yaml, chiama una funzione di fallBack che può generare eccezioni o fare cose. <br  />
 > Questo componente va implementato in ogni microservizio che deve contattare altri microservizi. <br  />
+
 
 Dipendenze da inserire:
 ```sh
