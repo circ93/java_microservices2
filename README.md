@@ -31,6 +31,48 @@ Come funziona:
 > Resilience4j è un componente che a seconda della API annotata con @Resilience4j lui fa il polling del servizio chiamato e sa se il servizio è disponibile (circuito chiuso), o non disponibile (circuito apert), tempi di attesa per la risposta (mezzo aperto). Se il circuito presenta problemi, a seconda dei mille settaggi nel file yaml, chiama una funzione di fallBack che può generare eccezioni o fare cose. <br  />
 > Questo componente va implementato in ogni microservizio che deve contattare altri microservizi. <br  />
 
+Dipendenze da inserire:
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+Parametri da inserire nello yaml:
+
+resilience4j:
+  circuitbreaker:
+    circuit-breaker-aspect-order: 1
+    instances:
+      addPizzasToRestaurantCircuitBreaker:
+        wait-duration-in-open-state: 1m
+        permitted-number-of-calls-in-half-open-state: 3
+        sliding-window-type: count-based
+        sliding-window-size: 5
+        minimum-number-of-calls: 5
+        slow-call-duration-threshold: 10s
+        slow-call-rate-threshold: 60
+        failure-rate-threshold: 60
+  retry:
+    retry-aspect-order: 2
+    instances:
+      retryAddPizzasToRestaurant:
+        max-attempts: 3
+        wait-duration: 5s
+        enable-exponential-backoff: true
+        exponential-backoff-multiplier: 2
+        retry-exceptions:
+          - org.springframework.web.client.RestClientException
+
+
+
 - Esercizio 9 -> spring cloud implementation (Spring Cloud Zipkin) ...coming soon
 
 <img src="https://github.com/circ93/java_microservices2/blob/4b65f85a1ecab23b554e3f829c100a8c5f4a3163/img/zipkin.png" alt="drawing" width="500"/>
@@ -56,4 +98,11 @@ Poi tocca inserire le dipendenze nei microservizi:
 Inserire le seguenti configurazioni sui vari servizi
 
 <img src="https://github.com/circ93/java_microservices2/blob/b84b729d2bf478f87d52ead35f50255513109618/img/openFeign_conf.png" alt="drawing" width="500"/>
+
+Dipendenze del Pom
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
 
