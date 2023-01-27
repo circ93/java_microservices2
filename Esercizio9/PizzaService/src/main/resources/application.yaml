@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: PIZZA-SERVICE
+  config:
+    import: optional:configserver:http://localhost:8888/config
+  profiles:
+    active: default
+    #se inserisco il profilo prod allora il configService gli passa il file con il nome-{nome profilo}
+    #active: prod
