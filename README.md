@@ -34,3 +34,18 @@ Come funziona:
 - Esercizio 9 -> spring cloud implementation (Spring Cloud Zipkin) ...coming soon
 
 <img src="https://github.com/circ93/java_microservices2/blob/4b65f85a1ecab23b554e3f829c100a8c5f4a3163/img/zipkin.png" alt="drawing" width="500"/>
+
+inserire anche le dipendenze nei microservizi:
+
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-starter-sleuth</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework.cloud</groupId>
+    <artifactId>spring-cloud-sleuth-zipkin</artifactId>
+</dependency>
+
+- Esercizio 10 -> spring cloud implementation (Spring Cloud OpenFeign) ...coming soon
+
+<img src="https://github.com/circ93/java_microservices2/blob/c3de6faca77743e0f48b9e2fa6a99ecef839dcbc/img/openFeign.png" alt="drawing" width="500"/>
