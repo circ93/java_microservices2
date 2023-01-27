@@ -19,3 +19,4 @@
 ## 27/01
 - Esercizio 6 -> spring cloud implementation (Spring Cloud Gateway)
 - Esercizio 7 -> spring cloud implementation (Spring Cloud Config Server)
+- Esercizio 8 -> spring cloud implementation (Spring Cloud Circuit Breaker) ...coming soon
