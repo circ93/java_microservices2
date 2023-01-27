@@ -53,3 +53,7 @@ Poi tocca inserire le dipendenze nei microservizi:
 
 <img src="https://github.com/circ93/java_microservices2/blob/c3de6faca77743e0f48b9e2fa6a99ecef839dcbc/img/openFeign.png" alt="drawing" width="500"/>
 
+Inserire le seguenti configurazioni sui vari servizi
+
+<img src="https://github.com/circ93/java_microservices2/blob/b84b729d2bf478f87d52ead35f50255513109618/img/openFeign_conf.png" alt="drawing" width="500"/>
+
