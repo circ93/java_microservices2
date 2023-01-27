@@ -33,4 +33,4 @@ Come funziona:
 
 - Esercizio 9 -> spring cloud implementation (Spring Cloud Zipkin) ...coming soon
 
-<img src="https://github.com/circ93/java_microservices2/blob/9cd223559f4b83d30ebc5439c6ff792fae8e0999/img/zipkin.png" alt="drawing" width="500"/>
+<img src="https://github.com/circ93/java_microservices2/blob/4b65f85a1ecab23b554e3f829c100a8c5f4a3163/img/zipkin.png" alt="drawing" width="500"/>
