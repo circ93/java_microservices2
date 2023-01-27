@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: CONFIG-SERVICE
+  cloud:
+    config:
+      server:
+        git:
+          #uri: file://${user.home}\Documents\Java\project_microservices
+          uri: https://github.com/circ93/project_microservices.git
+          #proprietà per cui il server si copia la cartella di configurazione,
+          #così nel caso il server va giu non ha problemi a riscaricare la configurazione
+          clone-on-start: true
+
+server:
+  port: 8888
+  servlet:
+    context-path: /config

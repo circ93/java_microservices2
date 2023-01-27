@@ -30,8 +30,8 @@
 <br  />
 Come funziona:
 <br  />
-> Resilience4j è un componente che a seconda della API annotata con @Resilience4j lui fa il polling del servizio chiamato e sa se il servizio è disponibile (circuito chiuso), o non disponibile (circuito apert), tempi di attesa per la risposta (mezzo aperto). Se il circuito presenta problemi, a seconda dei mille settaggi nel file yaml, chiama una funzione di fallBack che può generare eccezioni o fare cose. <br  />
-> Questo componente va implementato in ogni microservizio che deve contattare altri microservizi. <br  />
+Resilience4j è un componente che a seconda della API annotata con @Resilience4j lui fa il polling del servizio chiamato e sa se il servizio è disponibile (circuito chiuso), o non disponibile (circuito apert), tempi di attesa per la risposta (mezzo aperto). Se il circuito presenta problemi, a seconda dei mille settaggi nel file yaml, chiama una funzione di fallBack che può generare eccezioni o fare cose. <br  />
+Questo componente va implementato in ogni microservizio che deve contattare altri microservizi. <br  />
 
 
 Dipendenze da inserire:
@@ -115,4 +115,14 @@ Dipendenze del Pom
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
+```
+
+## CREAZIONE DOCKER IMAGE DA PROGETTO MAVEN
+
+```sh
+<configuration>
+    <image>
+        <name>com.myrestaurant.store/notification-service</name>
+    </image>
+</configuration>
 ```
