@@ -20,3 +20,5 @@
 - Esercizio 6 -> spring cloud implementation (Spring Cloud Gateway)
 - Esercizio 7 -> spring cloud implementation (Spring Cloud Config Server)
 - Esercizio 8 -> spring cloud implementation (Spring Cloud Circuit Breaker) ...coming soon
+
+![Alt text](https://github.com/circ93/java_microservices2/blob/9cd223559f4b83d30ebc5439c6ff792fae8e0999/img/spring_cloud_circuit_braker.png?raw=true "circuit braker")
