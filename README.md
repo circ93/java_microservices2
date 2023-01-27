@@ -31,3 +31,6 @@ Come funziona:
 > Resilience4j è un componente che a seconda della API annotata con @Resilience4j lui fa il polling del servizio chiamato e sa se il servizio è disponibile (circuito chiuso), o non disponibile (circuito apert), tempi di attesa per la risposta (mezzo aperto). Se il circuito presenta problemi, a seconda dei mille settaggi nel file yaml, chiama una funzione di fallBack che può generare eccezioni o fare cose. <br  />
 > Questo componente va implementato in ogni microservizio che deve contattare altri microservizi.
 
+- Esercizio 9 -> spring cloud implementation (Spring Cloud Zipkin) ...coming soon
+
+<img src="https://github.com/circ93/java_microservices2/blob/9cd223559f4b83d30ebc5439c6ff792fae8e0999/img/zipkin.png" alt="drawing" width="500"/>
