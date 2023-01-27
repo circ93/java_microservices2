@@ -17,5 +17,5 @@
 - Esercizio 5 -> start spring cloud implementation (Spring Cloud Eureka)
 
 ## 27/01
-- Esercizio 5 -> start spring cloud implementation
-					- Gateway
+- Esercizio 6 -> spring cloud implementation (Spring Cloud Gateway)
+- Esercizio 7 -> spring cloud implementation (Spring Cloud Config Server)

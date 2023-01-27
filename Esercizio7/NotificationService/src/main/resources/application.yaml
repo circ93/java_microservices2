@@ -1,0 +1,19 @@
+
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+
+app:
+  rabbitmq:
+    pizzas-added-notification: q.pizzas-added-notification
+
+server:
+  port: 0
+
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
