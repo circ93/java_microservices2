@@ -35,8 +35,11 @@ Come funziona:
 
 <img src="https://github.com/circ93/java_microservices2/blob/4b65f85a1ecab23b554e3f829c100a8c5f4a3163/img/zipkin.png" alt="drawing" width="500"/>
 
-inserire anche le dipendenze nei microservizi:
+Prima cosa da fare è avviare il container doker con zipkin sulla porta di default 9411.
 
+Poi tocca inserire le dipendenze nei microservizi:
+
+<!-- ZipKin -->
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-sleuth</artifactId>
@@ -49,3 +52,4 @@ inserire anche le dipendenze nei microservizi:
 - Esercizio 10 -> spring cloud implementation (Spring Cloud OpenFeign) ...coming soon
 
 <img src="https://github.com/circ93/java_microservices2/blob/c3de6faca77743e0f48b9e2fa6a99ecef839dcbc/img/openFeign.png" alt="drawing" width="500"/>
+
