@@ -1,0 +1,53 @@
+services:
+  discovery-service:
+    container_name: "discovery-service"
+    image: com.myrestaurant.store/discovery-service
+    ports:
+      - 8761:8761
+
+  gateway-service:
+    container_name: "gateway-service"
+    image: com.myrestaurant.store/gateway-service
+    ports:
+      - 8080:8080
+    depends_on: 
+      - discovery-service
+
+  restaurant-service:
+    container_name: "restaurant-service"
+    image: com.myrestaurant.store/restaurant-service
+    expose:
+      - 8080
+    depends_on:
+      - gateway-service
+      - rabbitmq3
+      - zipkin
+
+  pizza-service:
+    container_name: "pizza-service"
+    image: com.myrestaurant.store/pizza-service
+    expose:
+      - 8080
+    depends_on:
+      - restaurant-service
+
+  notification-service:
+    container_name: "notification-service"
+    image: com.myrestaurant.store/notification-service
+    expose:
+      - 8080
+    depends_on:
+      - pizza-service
+
+  rabbitmq3:
+    container_name: "rabbitmq"
+    image: rabbitmq:3-management    
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    ports:
+      - 9411:9411

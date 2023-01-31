@@ -17,7 +17,7 @@
 - Esercizio 5 -> start spring cloud implementation (Spring Cloud Eureka)
 
 Il Servizio di Spring Cloud Eureka serve per poter sapere dove posso contattare i microservizi, infatti tutti si devono registrare all'eureka server. Quindi è buona pratica implementare questo componente come un microservizio a parte, lo chiameremo DiscoveryService. <br  />
-La dependency da aggiungere anche in tutti i microservizi è:
+La dependency da aggiungere in tutti i microservizi è:
 ```sh
 <dependency>
     <groupId>org.springframework.cloud</groupId>
@@ -26,6 +26,7 @@ La dependency da aggiungere anche in tutti i microservizi è:
 ```
 <br  />
 Nello yaml di DiscoveryService bisogna inserire la seguente configurazione:
+
 ```sh
 spring:
   application:
@@ -40,6 +41,7 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
 ```
+<br  />
 Dopo di che bisogna aggiungere l'annotazione @EnableEurekaServer nella main class annotata come SpringBootApplication!
 <br  />
 Mentre la configurazione dei microservizi è la seguente:
@@ -114,7 +116,7 @@ Inoltre introduce anche il concetto di profili, tramite i profili posso sceglier
 
 Zipkin mi permette di capire quali microservizi vengono contattati quando viene fatta una richiesta. Il controllo avviene tramite Spring Cloud Dynamic Tracing, ad ogni richiesta viene assegnato un identificativo (Trace) che identifica quella specifica chiamata in ingresso. Per ogni servizio che viene invocato per rispondere alla chiamata viene genrato uno SPAN, questo mi aiuterà a capire che quella specifica chiamata ha attraversato tot servizi. Sapere che quello Span fa parte di quella traccia (trace) mi fa capire che quel servizio è stato invocato da quella specifica chiamata.
 
-Sleut ha le API di Tracing e zipkin si occupa dell'implementazione dell'Api; motivo per cui ogni servizio deve avere le dipendenze di zipkin. Per ogni richiesta ogni microservizio deve comunicare zipkin i dati di traccia per cui è stato contattato, di per se il microservizio di queste info non ci fa nulla, ma è zipkin che ricostruisce la trace grazie all'identificativo span di ogni microservizio. Ma non solo, queste dependency occorrono al microservizio affinchè decorino la richiesta in uscita con l'identificativo di trace, così che il microservizio successivo sa che quella richiesta arriva da quella trace.
+Sleut ha le API di Tracing e zipkin si occupa dell'implementazione dell'Api; motivo per cui ogni servizio deve avere le dipendenze di zipkin. Per ogni richiesta ogni microservizio deve comunicare a zipkin i dati di traccia per cui è stato contattato, di per se il microservizio di queste info non ci fa nulla, ma è zipkin che ricostruisce la trace grazie all'identificativo span di ogni microservizio. Ma non solo, queste dependency occorrono al microservizio affinchè decorino la richiesta in uscita con l'identificativo di trace, così che il microservizio successivo sa che quella richiesta arriva da quella trace.
 
 
 <img src="https://github.com/circ93/java_microservices2/blob/4b65f85a1ecab23b554e3f829c100a8c5f4a3163/img/zipkin.png" alt="drawing" width="500"/>
@@ -143,6 +145,7 @@ Poi tocca inserire le dipendenze nei microservizi:
 OpenFeign definisce la truttura delle Api, a runtime la libreria di OpenFeign crea il client Rest per chiamate sincrone. Quindi creando l'interfaccia con il metodo che ci occorre lui lo genera in automatico. L'esempio pratico è implementato nel controller di restaurant-service.
 L'interfaccia PizzaServiceClient nel package integration.pizza.client è annotata con @FeignClient, nell'url inietto l'api del servizio da contattare, recuperandolo dalla configurazione.yaml. L'unico metodo presente risponde ad una Post che si aspetta una lista di RestaurantIdsDTO e restituisce una lista di object, solo con queste informazioni è in grado di implementare il metodo in autonomia e rispondere alla richiesta. Infatti questo metodo viene invocato nel RestaurantControllerImpl se viene fatta una Post ad /aggiungiPizzas.
 <br  />
+<br  />
 Per funzionare ha bisogno delle seguenti configurazioni:
 
 <img src="https://github.com/circ93/java_microservices2/blob/b84b729d2bf478f87d52ead35f50255513109618/img/openFeign_conf.png" alt="drawing" width="500"/>
@@ -151,10 +154,12 @@ Per funzionare ha bisogno delle seguenti configurazioni:
 Bisogna aggiungere le seguenti dipendenze nel Pom:
 
 ```sh
+
 <dependency>
     <groupId>org.springframework.cloud</groupId>
     <artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
+
 ```
 <br  />
 
@@ -208,9 +213,13 @@ resilience4j:
 ```
 <br  />
 Per utilizzare CircuitBraker bisogna annotare le specifiche Api con la seguente annotation:
+
 ```sh
+
 @CircuitBreaker(name = "aggiungiPizzasToRestaurant", fallbackMethod = "aggiungiPizzaToRestaurantFailed")
+
 ```
+<br  />
 il nome deve coincidere con l'instances all'interno dello yaml, mentre la funzione di fallback deve essere implementata e deve ricevere come parametro una Exeption. Ad esempio:
 
 ```sh
@@ -264,7 +273,7 @@ Per generare le immagini docker bisogna inserire la seguente configuration nel P
 </configuration>
 ```
 
-In questo progetto sono preenti 6 microservices, ognuno con una configurazione diversa.<br  />
+In questo progetto sono presenti 6 microservices, ognuno con una configurazione diversa.<br  />
 
 Per una corretta procedura di avvio dei servizi ho creato un dockercompose-restaurant-project.yaml file con tutte le specifiche dipendenze, solo il ConfigService viene avviato in locale sulla porta 8888 e il quale recupera le configurazioni da una Repo git.
 
@@ -275,7 +284,7 @@ docker-compose -f dockercompose-restaurant-project.yaml up -d
 il risultato sarà il seguente:
 
 
-<img src="#" alt="drawing" width="500"/>
+<img src="https://github.com/circ93/java_microservices2/blob/36a2222a1919805a3a815672baa5778c385e5592/img/docker_desktop.png" alt="drawing" width="500"/>
 
 <br  />
 
@@ -284,4 +293,4 @@ Aprendo la console di Eureka è possibile vedere che tutti i servizi si sono reg
 localhost:8080/api/...
 ```
 <br  />
-<img src="#" alt="drawing" width="500"/>
+<img src="https://github.com/circ93/java_microservices2/blob/36a2222a1919805a3a815672baa5778c385e5592/img/eureka_registration.png" alt="drawing" width="500"/>
