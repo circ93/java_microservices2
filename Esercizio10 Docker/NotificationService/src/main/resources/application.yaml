@@ -1,0 +1,12 @@
+
+spring:
+  application:
+    name: NOTIFICATION-SERVICE
+  config:
+    import: optional:configserver:http://host.docker.internal:8888/config
+  profiles:
+    active: sms, letter
+  zipkin:
+    base-url: http://zipkin:9411
+  main:
+    allow-circular-references: true

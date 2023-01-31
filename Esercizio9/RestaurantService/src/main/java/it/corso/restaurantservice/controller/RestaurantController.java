@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import it.corso.restaurantservice.dto.RestaurantDTO;
 import it.corso.restaurantservice.dto.RestaurantIdsDTO;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
@@ -34,4 +35,7 @@ public interface RestaurantController {
     //metodo  che mi aggiunge le pizze a un ristornate, nel restourantIds ci sono i riferimenti agli id delle pizze
     @ApiOperation("Add pizzas to restaurant")
     public List<Object> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS);
+
+    @ApiOperation("Aggiungi pizza al ristorante - chiamata sincrona")
+    public List<Object> aggiungiPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS);
 }

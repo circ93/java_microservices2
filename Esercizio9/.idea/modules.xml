@@ -4,7 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ConfigService/ConfigService.iml" filepath="$PROJECT_DIR$/ConfigService/ConfigService.iml" />
       <module fileurl="file://$PROJECT_DIR$/DiscoveryService/DiscoveryService.iml" filepath="$PROJECT_DIR$/DiscoveryService/DiscoveryService.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/Esercizio9.iml" filepath="$PROJECT_DIR$/.idea/Esercizio9.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Esercizio8.iml" filepath="$PROJECT_DIR$/.idea/Esercizio8.iml" />
       <module fileurl="file://$PROJECT_DIR$/GatewayService/GatewayService.iml" filepath="$PROJECT_DIR$/GatewayService/GatewayService.iml" />
       <module fileurl="file://$PROJECT_DIR$/NotificationService/NotificationService.iml" filepath="$PROJECT_DIR$/NotificationService/NotificationService.iml" />
       <module fileurl="file://$PROJECT_DIR$/PizzaService/PizzaService.iml" filepath="$PROJECT_DIR$/PizzaService/PizzaService.iml" />

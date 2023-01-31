@@ -3,10 +3,12 @@ package it.corso.restaurantservice.controller.impl;
 import it.corso.restaurantservice.controller.RestaurantController;
 import it.corso.restaurantservice.dto.RestaurantDTO;
 import it.corso.restaurantservice.dto.RestaurantIdsDTO;
+import it.corso.restaurantservice.integration.pizza.client.PizzaServiceClient;
 import it.corso.restaurantservice.mapper.RestaurantMapper;
 import it.corso.restaurantservice.model.Restaurant;
 import it.corso.restaurantservice.service.RestaurantService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,8 @@ public class RestaurantControllerImpl implements RestaurantController {
 
     private final RestaurantService restaurantService;
     private final RestaurantMapper restaurantMapper;
+
+    private final PizzaServiceClient pizzaServiceClient;
 
     //mi occorre per richiamare l'url del servizio pizza salvato nel file properties
     @Value("${app.pizza-service-url}")
@@ -70,17 +74,15 @@ public class RestaurantControllerImpl implements RestaurantController {
     }
 
 
-    /*
-    METODO PER LA COMUNICAZIONE SINCRONA
+    //CHIAMATA SINCRONA tramite OpenFeign
     @Override
-    @PostMapping("/addPizzas")
-    public List<Object> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS) {
-        RestTemplate restTemplate = new RestTemplate();
-        return List.of(Objects.requireNonNull(restTemplate.postForObject(pizzaServiceUrl, restaurantIdsDTOS, Object[].class)));
+    @PostMapping("/aggiungiPizzas")
+    public List<Object> aggiungiPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS) {
+        return pizzaServiceClient.aggiungiPizzaToRestaurant(restaurantIdsDTOS);
     }
 
-     */
 
+    // CHIAMA ASINCRONA
     @Override
     @PostMapping("/addPizzas")
     public List<Object> addPizzasToRestaurant(@RequestBody List<RestaurantIdsDTO> restaurantIdsDTOS) {
