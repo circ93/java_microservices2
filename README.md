@@ -45,7 +45,9 @@ eureka:
 Dopo di che bisogna aggiungere l'annotazione @EnableEurekaServer nella main class annotata come SpringBootApplication!
 <br  />
 Mentre la configurazione dei microservizi è la seguente:
+<br  />
 ```sh
+
 eureka:
   client:
     #permette la registrazione al server
@@ -54,6 +56,7 @@ eureka:
     service-url:
       #bisogna dirgli dove poter contattare il servizio di Eureka server
       defaultZone: http://localhost:8761/eureka/
+
 ```
 Anche nei microservices occorre l'annotazione @EnableEurekaClient nella main class annotata come SpringBootApplication!
 
